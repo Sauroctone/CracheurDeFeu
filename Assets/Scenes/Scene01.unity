@@ -3474,6 +3474,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireBreath: {fileID: 1929068298}
+--- !u!114 &421580886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 421580879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3530639f18b5039459935cf7a2a34b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bottleCount: 0
 --- !u!1 &841257992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3804,7 +3816,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2027913920
+  randomSeed: 942927541
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4161,7 +4173,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1.5707963
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4985,12 +4997,12 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 0
+    enabled: 1
     m_Mode: 0
     m_Curve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.8
       minScalar: 0
       maxCurve:
         serializedVersion: 2
