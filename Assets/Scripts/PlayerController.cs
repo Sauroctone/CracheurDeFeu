@@ -5,18 +5,30 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float speed = 5f;
+	public float speedBreathing = 3f;
+	public float speedWalking = 5f;
 	public float jumpForce = 3f;
+	public float jumpBuffer = 0.1f;
+	public bool wantsToJump;
 	public float maxVelocity;
 	private float movLerp;
 	public float airControl;
 	public float gravityFactor;
 
 	private Rigidbody2D rb;
-	private bool isGrounded;
+	public bool isGrounded;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D> ();
+	}
+
+	void Update()
+	{
+		if (Input.GetButtonDown ("Jump")) 
+		{
+			StartCoroutine ("JumpInputBuffering");
+		}
 	}
 
 	void FixedUpdate()
@@ -32,7 +44,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (isGrounded) 
 		{
-			if (Input.GetButtonDown ("Jump")) 
+			if (wantsToJump) 
 			{
 				rb.AddForce (transform.up * jumpForce, ForceMode2D.Impulse);
 			}
@@ -53,6 +65,13 @@ public class PlayerController : MonoBehaviour {
 		//Max speed
 
 		rb.velocity = Vector2.ClampMagnitude (rb.velocity, maxVelocity);
+	}
+
+	IEnumerator JumpInputBuffering ()
+	{
+		wantsToJump = true;
+		yield return new WaitForSeconds (jumpBuffer);
+		wantsToJump = false;
 	}
 
 	//isGrounded = true;
