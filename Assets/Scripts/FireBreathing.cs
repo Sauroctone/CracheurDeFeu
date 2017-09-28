@@ -11,12 +11,14 @@ public class FireBreathing : MonoBehaviour {
 	private float rightStickY;
 	private float angle;
 	private float scaleX;
+	public GameObject playerVisuals;
+	public GameObject fireRotation;
 
 	void Start()
 	{
 		player = GetComponent<PlayerController> ();
 		bottles = GetComponent<BottleManager> ();
-		scaleX = transform.localScale.x;
+		scaleX = playerVisuals.transform.localScale.x;
 	}
 
 	// Update is called once per frame
@@ -38,14 +40,19 @@ public class FireBreathing : MonoBehaviour {
 
 		if (rightStickX != 0 || rightStickY != 0) 
 		{
-			fireBreath.transform.eulerAngles = new Vector3 (-180 + angle, -90, 90);
+			fireBreath.transform.localEulerAngles = new Vector3 (0, angle, 0);
 		}
 
-		//REGLER CA
-		if (fireBreath.transform.eulerAngles.x > (-180 + 90) || fireBreath.transform.eulerAngles.x < (-180 -90)) 
+		print (fireBreath.transform.localEulerAngles.y);
+
+		if (fireBreath.transform.localEulerAngles.y > 90 && fireBreath.transform.localEulerAngles.y < 270) 
 		{
-			print ("hop");
-			transform.localScale = new Vector3 (-scaleX, transform.localScale.y, transform.localScale.z);
+			playerVisuals.transform.localScale = new Vector3 (-scaleX, 1, 1);
+		}
+
+		else 
+		{
+			playerVisuals.transform.localScale = new Vector3 (scaleX, 1, 1);
 		}
 	}
 }
