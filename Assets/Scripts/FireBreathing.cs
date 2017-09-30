@@ -11,8 +11,9 @@ public class FireBreathing : MonoBehaviour {
 	private float rightStickY;
 	private float angle;
 	private float scaleX;
+	private float fireRotationX;
 	public GameObject playerVisuals;
-	public GameObject fireRotation;
+	public GameObject fireRotator;
 
 	void Start()
 	{
@@ -40,12 +41,10 @@ public class FireBreathing : MonoBehaviour {
 
 		if (rightStickX != 0 || rightStickY != 0) 
 		{
-			fireBreath.transform.localEulerAngles = new Vector3 (0, angle, 0);
+			fireRotator.transform.localEulerAngles = new Vector3 (0, angle, 0);
 		}
-
-		print (fireBreath.transform.localEulerAngles.y);
-
-		if (fireBreath.transform.localEulerAngles.y > 90 && fireBreath.transform.localEulerAngles.y < 270) 
+			
+		if (fireRotator.transform.localEulerAngles.y > 90 && fireRotator.transform.localEulerAngles.y < 270) 
 		{
 			playerVisuals.transform.localScale = new Vector3 (-scaleX, 1, 1);
 		}
