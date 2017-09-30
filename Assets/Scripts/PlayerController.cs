@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 	public float jumpForce = 3f;
 	public float jumpBuffer = 0.1f;
 	public bool wantsToJump;
+	public bool justLeftPlatform;
+	public bool isJumping;
 	public float maxVelocity;
 	private float movLerp;
 	public float airControl;
@@ -47,7 +49,8 @@ public class PlayerController : MonoBehaviour {
 			if (wantsToJump) 
 			{
 				rb.AddForce (transform.up * jumpForce, ForceMode2D.Impulse);
-			}
+				isJumping = true;
+			} 
 
 			movLerp = 1f;
 		} 
@@ -55,6 +58,12 @@ public class PlayerController : MonoBehaviour {
 		else 
 		{
 			movLerp = airControl;
+
+			if (wantsToJump && justLeftPlatform && !isJumping) 
+			{
+				rb.AddForce (transform.up * jumpForce, ForceMode2D.Impulse);
+				isJumping = true;
+			}
 
 			if (Input.GetButtonUp ("Jump"))
 			{
@@ -74,12 +83,20 @@ public class PlayerController : MonoBehaviour {
 		wantsToJump = false;
 	}
 
+	IEnumerator JumpGraceTimer ()
+	{
+		justLeftPlatform = true; 
+		yield return new WaitForSeconds (jumpBuffer);
+		justLeftPlatform = false;
+	}
+
 	//isGrounded = true;
 	void OnTriggerEnter2D (Collider2D col)
 	{
 		if (col.tag == "Floor") 
 		{
 			isGrounded = true;
+			isJumping = false;
 			rb.gravityScale = 1;
 		}
 	}		
@@ -90,6 +107,7 @@ public class PlayerController : MonoBehaviour {
 		if (col.tag == "Floor") 
 		{
 			isGrounded = false;
+			StartCoroutine ("JumpGraceTimer");
 		}
 	} 	
 }
