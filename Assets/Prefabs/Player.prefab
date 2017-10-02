@@ -285,6 +285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireBreath: {fileID: 198232487873094378}
+  startRotLow: 0.5
+  startRotHigh: 0.8
   playerVisuals: {fileID: 1829233036313588}
   fireRotator: {fileID: 1117558174704782}
 --- !u!114 &114640515368989794
@@ -298,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3530639f18b5039459935cf7a2a34b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottleCount: 1000
+  alcoholCount: 10000
 --- !u!114 &114822059622020750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,7 +383,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1671726426
+  randomSeed: 353821168
   InitialModule:
     serializedVersion: 3
     enabled: 1
