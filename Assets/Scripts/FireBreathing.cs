@@ -18,6 +18,7 @@ public class FireBreathing : MonoBehaviour {
 	private float angle;
 	private float scaleX;
 	private float fireRotationX;
+	public float lightLerp;
 
 	public float initStartLifeLow;
 	public float initStartLifeHigh;
@@ -106,7 +107,7 @@ public class FireBreathing : MonoBehaviour {
 
 		if (rightStickX != 0 || rightStickY != 0) 
 		{
-			fireRotator.transform.localEulerAngles = new Vector3 (0, angle, 0);
+			fireRotator.transform.localEulerAngles = Vector3.Lerp (fireRotator.transform.localEulerAngles, new Vector3 (0, angle, 0), lightLerp);
 		}
 			
 		if (fireRotator.transform.localEulerAngles.y > 90 && fireRotator.transform.localEulerAngles.y < 270) 
