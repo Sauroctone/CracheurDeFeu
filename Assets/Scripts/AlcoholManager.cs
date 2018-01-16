@@ -31,7 +31,7 @@ public class AlcoholManager : MonoBehaviour {
 		if (alcoholCount < 0)
 			alcoholCount = 0;
 
-		alcoholBar.value = alcoholCount;
+		alcoholBar.value = alcoholCount / 100;
 
 		if (isBreathing) 
 		{
@@ -47,7 +47,7 @@ public class AlcoholManager : MonoBehaviour {
 		if (health > 0)
 			health -= healthDecay * Time.deltaTime;
 
-		lifeBar.value = health;
+		lifeBar.value = health / 100;
 
 		if (health <= 0)
 		{

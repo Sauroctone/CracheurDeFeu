@@ -57,7 +57,7 @@ public class FireBreathing : MonoBehaviour {
 		{
 			fireBreath.Play ();
 			player.speed = player.speedBreathing;
-			fireBreathLight.SetActive (true);
+			//fireBreathLight.SetActive (true);
 		}
 
 		if (Input.GetButton ("BreatheFire") && alcohol.alcoholCount > 0) 
