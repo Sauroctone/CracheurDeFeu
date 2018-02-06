@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class AlcoholManager : MonoBehaviour {
 
+    [Range(0, 100)]
 	public float alcoholCount;
+    [Range(0, 100)]
 	public float health = 100;
 	public float healthDecay;
 	public float bottleValue;
@@ -27,12 +29,7 @@ public class AlcoholManager : MonoBehaviour {
 	}
 
 	void Update()
-	{
-		if (alcoholCount < 0)
-			alcoholCount = 0;
-
-		alcoholBar.value = alcoholCount / 100;
-
+    { 
 		if (isBreathing) 
 		{
 			alcoholCount -= alcoholBurn * Time.deltaTime;
@@ -53,11 +50,16 @@ public class AlcoholManager : MonoBehaviour {
 		{
 			SceneManager.LoadScene (scene.name);
 		}
-	}
+
+        alcoholBar.value = alcoholCount / 100;
+
+        health = Mathf.Clamp(health, 0, 100);
+        alcoholCount = Mathf.Clamp(alcoholCount, 0, 100);
+    }
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.tag == "Alcohol") 
+		if (col.tag == "Alcohol" && alcoholCount < 100) 
 		{
 			alcoholCount += bottleValue;
 

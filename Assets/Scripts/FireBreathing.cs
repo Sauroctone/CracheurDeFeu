@@ -7,11 +7,10 @@ public class FireBreathing : MonoBehaviour {
 	public ParticleSystem fireBreath;
 	private PlayerController player;
 	private AlcoholManager alcohol;
-	private Light light;
+	private Light myLight;
 
 	public GameObject playerVisuals;
 	public GameObject fireRotator;
-	public GameObject fireBreathLight;
 
 	private float rightStickX;
 	private float rightStickY;
@@ -20,34 +19,34 @@ public class FireBreathing : MonoBehaviour {
 	private float fireRotationX;
 	public float lightLerp;
 
-	public float initStartLifeLow;
-	public float initStartLifeHigh;
-	public float startLifeLow;
-	public float startLifeHigh;
-	public float startLifeIncrement;
-	public float startLifeLimit;
+	//public float initStartLifeLow;
+	//public float initStartLifeHigh;
+	//public float startLifeLow;
+	//public float startLifeHigh;
+	//public float startLifeIncrement;
+	//public float startLifeLimit;
 
-	public float initRateOverTime;
-	public float rateOverTime;
-	public float rateIncrement;
-	public float rateLimit;
+	//public float initRateOverTime;
+	//public float rateOverTime;
+	//public float rateIncrement;
+	//public float rateLimit;
 
-	private float initLightRange;
-	public float lightRangeIncrement;
-	public float lightRangeLimit;
+	//private float initLightRange;
+	//public float lightRangeIncrement;
+	//public float lightRangeLimit;
 
 	void Start()
 	{
 		player = GetComponent<PlayerController> ();
 		alcohol = GetComponent<AlcoholManager> ();
-		light = fireBreathLight.GetComponent<Light> ();
+		//light = fireBreathLight.GetComponent<Light> ();
 
 		scaleX = playerVisuals.transform.localScale.x;
-		startLifeLow = initStartLifeLow;
+/*		startLifeLow = initStartLifeLow;
 		startLifeHigh = initStartLifeHigh;
 		rateOverTime = initRateOverTime;
-
-		initLightRange = light.range;
+*/
+		//initLightRange = light.range;
 	}
 
 	// Update is called once per frame
@@ -56,49 +55,52 @@ public class FireBreathing : MonoBehaviour {
 		if (!fireBreath.isEmitting && Input.GetButtonDown ("BreatheFire") && alcohol.alcoholCount > 0) 
 		{
 			fireBreath.Play ();
-			player.speed = player.speedBreathing;
+            
 			//fireBreathLight.SetActive (true);
 		}
 
 		if (Input.GetButton ("BreatheFire") && alcohol.alcoholCount > 0) 
 		{
-			alcohol.isBreathing = true;
+            if (player.isGrounded)
+                player.speed = player.speedBreathing;
 
-			if (startLifeHigh < startLifeLimit)
-			{
-				var main = fireBreath.main;
-				startLifeLow += startLifeIncrement * Time.deltaTime;
-				startLifeHigh += startLifeIncrement * Time.deltaTime;
-				main.startLifetime = new ParticleSystem.MinMaxCurve (startLifeLow, startLifeHigh);
-			}
+            alcohol.isBreathing = true;
+            /*
+                        if (startLifeHigh < startLifeLimit)
+                        {
+                            var main = fireBreath.main;
+                            startLifeLow += startLifeIncrement * Time.deltaTime;
+                            startLifeHigh += startLifeIncrement * Time.deltaTime;
+                            main.startLifetime = new ParticleSystem.MinMaxCurve (startLifeLow, startLifeHigh);
+                        }
 
-			if (rateOverTime < rateLimit)
-			{
-				var emission = fireBreath.emission;
-				rateOverTime += rateIncrement * Time.deltaTime;
-				emission.rateOverTime = new ParticleSystem.MinMaxCurve (rateOverTime);
-			}
+                        if (rateOverTime < rateLimit)
+                        {
+                            var emission = fireBreath.emission;
+                            rateOverTime += rateIncrement * Time.deltaTime;
+                            emission.rateOverTime = new ParticleSystem.MinMaxCurve (rateOverTime);
+                        }
 
-			if (light.range < lightRangeLimit) 
-			{
-				light.range += lightRangeIncrement * Time.deltaTime; 
-			}
-		}
+                        if (light.range < lightRangeLimit) 
+                        {
+                            light.range += lightRangeIncrement * Time.deltaTime; 
+                        } */
+        }
 
-		if (fireBreath.isPlaying && Input.GetButtonUp ("BreatheFire") || fireBreath.isPlaying && alcohol.alcoholCount <= 0) 
+        if (fireBreath.isPlaying && Input.GetButtonUp ("BreatheFire") || fireBreath.isPlaying && alcohol.alcoholCount <= 0) 
 		{
 			fireBreath.Stop ();
 			alcohol.isBreathing = false;
-
+/*
 			startLifeLow = initStartLifeLow;
 			startLifeHigh = initStartLifeHigh;
 			rateOverTime = initRateOverTime;
-
-			light.range = initLightRange;
-			fireBreathLight.SetActive (false);
+*/
+	//		light.range = initLightRange;
+			//fireBreathLight.SetActive (false);
 		}
 
-		if (!fireBreath.isEmitting)
+		if (!fireBreath.isEmitting && player.isGrounded)
 			player.speed = player.speedWalking;
 
 		rightStickX = Input.GetAxis("RS_Vertical");

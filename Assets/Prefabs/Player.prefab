@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114640515368989794}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,22 +63,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1270939054435570
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4772903788095222}
-  - component: {fileID: 108136298186569778}
-  m_Layer: 8
-  m_Name: FireBreathLight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
 --- !u!1 &1494015430647064
 GameObject:
   m_ObjectHideFlags: 1
@@ -183,7 +167,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4507491540216750}
-  - {fileID: 4772903788095222}
   m_Father: {fileID: 4650715618777574}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -207,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1096513003279582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.11, y: -0.399, z: 0}
+  m_LocalPosition: {x: -5.11, y: -0.84, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 4650715618777574}
@@ -243,19 +226,6 @@ Transform:
   m_Father: {fileID: 4591643490941668}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -180, y: -90, z: 90}
---- !u!4 &4772903788095222
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1270939054435570}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.29}
-  m_LocalScale: {x: 6.285597, y: 0.49, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4307177335756818}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4925482817702718
 Transform:
   m_ObjectHideFlags: 1
@@ -334,42 +304,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.08}
   m_Size: {x: 0.31, y: 0.94}
   m_Direction: 0
---- !u!108 &108136298186569778
-Light:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1270939054435570}
-  m_Enabled: 1
-  serializedVersion: 8
-  m_Type: 2
-  m_Color: {r: 1, g: 0.86237323, b: 0.5661765, a: 1}
-  m_Intensity: 2.5
-  m_Range: 9
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
 --- !u!108 &108489860083327152
 Light:
   m_ObjectHideFlags: 1
@@ -420,20 +354,7 @@ MonoBehaviour:
   fireBreath: {fileID: 198232487873094378}
   playerVisuals: {fileID: 1829233036313588}
   fireRotator: {fileID: 1117558174704782}
-  fireBreathLight: {fileID: 1270939054435570}
   lightLerp: 1
-  initStartLifeLow: 0.5
-  initStartLifeHigh: 0.8
-  startLifeLow: 0
-  startLifeHigh: 0
-  startLifeIncrement: 0.2
-  startLifeLimit: 2
-  initRateOverTime: 200
-  rateOverTime: 0
-  rateIncrement: 30
-  rateLimit: 400
-  lightRangeIncrement: 10
-  lightRangeLimit: 80
 --- !u!114 &114542822786879970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -480,14 +401,15 @@ MonoBehaviour:
   speed: 5
   speedBreathing: 3
   speedWalking: 5
-  jumpForce: 5
+  speedJumping: 5
+  jumpForce: 7
   jumpBuffer: 0.1
   wantsToJump: 0
   justLeftPlatform: 0
   isJumping: 0
   maxVelocity: 8
-  airControl: 0.1
-  gravityFactor: 1.5
+  normalGravity: 1.5
+  downGravity: 2.5
   isGrounded: 0
 --- !u!198 &198232487873094378
 ParticleSystem:
@@ -549,15 +471,15 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 353821168
+  randomSeed: -563220905
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.8
-      minScalar: 0.5
+      scalar: 0.5
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -597,8 +519,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
-      minScalar: 2
+      scalar: 5
+      minScalar: 4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1207,6 +1129,12 @@ ParticleSystem:
           outSlope: 2.879949
           tangentMode: 0
         - serializedVersion: 2
+          time: 0.50087935
+          value: 0.85559213
+          inSlope: 0.013823209
+          outSlope: 0.013823209
+          tangentMode: 0
+        - serializedVersion: 2
           time: 1
           value: 0
           inSlope: -3.9629045
@@ -1771,7 +1699,7 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 1
+    enabled: 0
     m_Mode: 0
     m_Curve:
       serializedVersion: 2
@@ -2157,11 +2085,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.29
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -2282,7 +2210,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 0.4
     damping: 1
     octaves: 1
     octaveMultiplier: 0.5
@@ -2291,7 +2219,7 @@ ParticleSystem:
     scrollSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3039,7 +2967,7 @@ ParticleSystem:
     radiusScale: 0.05
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967039
+      m_Bits: 4294966527
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -3070,7 +2998,7 @@ ParticleSystem:
   LightsModule:
     enabled: 1
     ratio: 0.5
-    light: {fileID: 0}
+    light: {fileID: 108983657633622888, guid: 7d06b9911c1221c4cb1d215a30eb0809, type: 2}
     randomDistribution: 0
     color: 1
     range: 0

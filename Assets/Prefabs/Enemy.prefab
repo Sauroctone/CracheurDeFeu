@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1321317413133344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.076, y: -1.865, z: 0}
+  m_LocalPosition: {x: -2.076, y: -2.12, z: 0}
   m_LocalScale: {x: 0.2981069, y: 0.7993886, z: 1}
   m_Children:
   - {fileID: 4292892864828138}
@@ -176,6 +176,8 @@ MonoBehaviour:
   damage: 20
   isOnFire: 0
   fire: {fileID: 198058330494346608}
+  health: 100
+  healthBurn: 30
 --- !u!198 &198058330494346608
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -243,8 +245,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.7
-      minScalar: 0.5
+      scalar: 0.4
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -796,7 +798,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 300
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1458,7 +1460,7 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 1
+    enabled: 0
     m_Mode: 0
     m_Curve:
       serializedVersion: 2

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public float speed = 5f;
 	public float speedBreathing = 3f;
 	public float speedWalking = 5f;
+    public float speedJumping;
 	public float jumpForce = 3f;
 	public float jumpBuffer = 0.1f;
 	public bool wantsToJump;
@@ -14,8 +15,9 @@ public class PlayerController : MonoBehaviour {
 	public bool isJumping;
 	public float maxVelocity;
 	private float movLerp;
-	public float airControl;
-	public float gravityFactor;
+    //public float airControl;
+    public float normalGravity;
+	public float downGravity;
 
 	private Rigidbody2D rb;
 	public bool isGrounded;
@@ -37,10 +39,11 @@ public class PlayerController : MonoBehaviour {
 	{
 		//Movement
 
-		float xinput = Input.GetAxisRaw ("Horizontal");	
+		float xinput = Input.GetAxisRaw ("Horizontal");
 
-		if (isGrounded || xinput != 0)
-			rb.velocity = Vector2.Lerp (rb.velocity, new Vector2 (xinput * speed, rb.velocity.y), movLerp);
+        if (isGrounded || xinput != 0)
+            //rb.velocity = Vector2.Lerp (rb.velocity, new Vector2 (xinput * speed, rb.velocity.y), movLerp);*
+            rb.velocity = new Vector2(xinput * speed, rb.velocity.y);
 
 		//Jump
 
@@ -57,7 +60,7 @@ public class PlayerController : MonoBehaviour {
 
 		else 
 		{
-			movLerp = airControl;
+			speed = speedJumping;
 
 			if (wantsToJump && justLeftPlatform && !isJumping) 
 			{
@@ -65,9 +68,9 @@ public class PlayerController : MonoBehaviour {
 				isJumping = true;
 			}
 
-			if (Input.GetButtonUp ("Jump"))
+			if (Input.GetButtonUp ("Jump") || rb.velocity.y < 0)
 			{
-				rb.gravityScale = rb.gravityScale * gravityFactor;
+				rb.gravityScale = downGravity;
 			}
 		}
 
@@ -97,7 +100,8 @@ public class PlayerController : MonoBehaviour {
 		{
 			isGrounded = true;
 			isJumping = false;
-			rb.gravityScale = 1;
+			rb.gravityScale = normalGravity;
+            speed = speedWalking;
 		}
 	}		
 
