@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed = 5f;
+    float xinput;
+    float yinput;
+	public float speed;
 	public float speedBreathing = 3f;
 	public float speedWalking = 5f;
     public float speedJumping;
@@ -14,13 +16,13 @@ public class PlayerController : MonoBehaviour {
 	public bool justLeftPlatform;
 	public bool isJumping;
 	public float maxVelocity;
-	private float movLerp;
     //public float airControl;
     public float normalGravity;
 	public float downGravity;
 
 	private Rigidbody2D rb;
-	public bool isGrounded;
+    public PlayerStates state;
+    Coroutine jumpGraceCor;
 
 	void Start()
 	{
@@ -39,45 +41,75 @@ public class PlayerController : MonoBehaviour {
 	{
 		//Movement
 
-		float xinput = Input.GetAxisRaw ("Horizontal");
+		xinput = Input.GetAxisRaw("Horizontal");
+        yinput = Input.GetAxisRaw("Vertical");
 
-        if (isGrounded || xinput != 0)
-            //rb.velocity = Vector2.Lerp (rb.velocity, new Vector2 (xinput * speed, rb.velocity.y), movLerp);*
-            rb.velocity = new Vector2(xinput * speed, rb.velocity.y);
+        if (state == PlayerStates.OnLadder)
+            MoveY();
+        else
+            MoveX();
 
-		//Jump
+        //Jump
 
-		if (isGrounded) 
-		{
-			if (wantsToJump) 
-			{
-				rb.AddForce (transform.up * jumpForce, ForceMode2D.Impulse);
-				isJumping = true;
-			} 
-
-			movLerp = 1f;
-		} 
-
-		else 
-		{
-			speed = speedJumping;
-
-			if (wantsToJump && justLeftPlatform && !isJumping) 
-			{
-				rb.AddForce (transform.up * jumpForce, ForceMode2D.Impulse);
-				isJumping = true;
-			}
-
-			if (Input.GetButtonUp ("Jump") || rb.velocity.y < 0)
-			{
-				rb.gravityScale = downGravity;
-			}
-		}
-
-		//Max speed
-
-		rb.velocity = Vector2.ClampMagnitude (rb.velocity, maxVelocity);
+        JumpAndAirbourne();
 	}
+
+    void MoveY()
+    {
+        rb.velocity = new Vector2(0f, yinput * speed);
+    }
+
+    void MoveX()
+    {
+        if (state != PlayerStates.Airbourne || xinput != 0)
+        {
+            rb.velocity = new Vector2(xinput * speed, rb.velocity.y);
+        }
+    }
+
+    void JumpAndAirbourne()
+    {
+        if (state == PlayerStates.Grounded)
+        {
+            if (wantsToJump)
+            {
+                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                isJumping = true;
+            }
+        }
+
+        if (state == PlayerStates.OnLadder)
+        {
+            if (wantsToJump)
+            {
+                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                isJumping = true;
+
+                state = PlayerStates.Airbourne;
+                rb.gravityScale = normalGravity;
+            }
+        }
+
+        if (state == PlayerStates.Airbourne)
+        {
+            speed = speedJumping;
+
+            if (wantsToJump && justLeftPlatform && !isJumping)
+            {
+                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                isJumping = true;
+            }
+
+            if (Input.GetButtonUp("Jump") || rb.velocity.y < 0)
+            {
+                rb.gravityScale = downGravity;
+            }
+
+            //Max speed
+
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
+        }
+    }
 
 	IEnumerator JumpInputBuffering ()
 	{
@@ -93,25 +125,50 @@ public class PlayerController : MonoBehaviour {
 		justLeftPlatform = false;
 	}
 
-	//isGrounded = true;
 	void OnTriggerEnter2D (Collider2D col)
 	{
 		if (col.tag == "Floor") 
 		{
-			isGrounded = true;
+            state = PlayerStates.Grounded;
 			isJumping = false;
 			rb.gravityScale = normalGravity;
             speed = speedWalking;
 		}
 	}		
 
-	//isGrounded = false;
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.tag == "Ladder" && yinput > 0 && state != PlayerStates.OnLadder)
+        {
+            state = PlayerStates.OnLadder;
+            rb.gravityScale = 0;
+            xinput = 0;
+        }
+    }
+
 	void OnTriggerExit2D (Collider2D col)
 	{
 		if (col.tag == "Floor") 
 		{
-			isGrounded = false;
-			StartCoroutine ("JumpGraceTimer");
-		}
+            if (state != PlayerStates.OnLadder)
+                state = PlayerStates.Airbourne;
+
+            if (jumpGraceCor != null)
+                StopCoroutine(jumpGraceCor);
+            jumpGraceCor = StartCoroutine(JumpGraceTimer());
+        }
+
+        if (col.tag == "Ladder")
+        {
+            if (state == PlayerStates.OnLadder)
+            {
+                state = PlayerStates.Airbourne;
+                rb.gravityScale = normalGravity;
+
+                if (jumpGraceCor != null)
+                    StopCoroutine(jumpGraceCor);
+                jumpGraceCor = StartCoroutine(JumpGraceTimer());
+            }
+        }
 	} 	
 }

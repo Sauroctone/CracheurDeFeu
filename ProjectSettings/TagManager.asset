@@ -8,6 +8,10 @@ TagManager:
   - Alcohol
   - Wall
   - Enemy
+  - Link
+  - Ladder
+  - TNT
+  - TorchOff
   layers:
   - Default
   - TransparentFX
@@ -19,9 +23,9 @@ TagManager:
   - 
   - Player
   - Background
-  - 
-  - 
-  - 
+  - Enemy
+  - Ladder
+  - Explosion
   - 
   - 
   - 

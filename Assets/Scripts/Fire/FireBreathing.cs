@@ -61,7 +61,7 @@ public class FireBreathing : MonoBehaviour {
 
 		if (Input.GetButton ("BreatheFire") && alcohol.alcoholCount > 0) 
 		{
-            if (player.isGrounded)
+            if (player.state == PlayerStates.Grounded)
                 player.speed = player.speedBreathing;
 
             alcohol.isBreathing = true;
@@ -100,7 +100,7 @@ public class FireBreathing : MonoBehaviour {
 			//fireBreathLight.SetActive (false);
 		}
 
-		if (!fireBreath.isEmitting && player.isGrounded)
+		if (!fireBreath.isEmitting && player.state == PlayerStates.Grounded)
 			player.speed = player.speedWalking;
 
 		rightStickX = Input.GetAxis("RS_Vertical");

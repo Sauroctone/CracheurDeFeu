@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rope : MonoBehaviour {
 
     public int links = 7;
+    public float burnTime;
     List<GameObject> linkArray = new List<GameObject>();
 
     public Rigidbody2D hook;
@@ -44,11 +45,24 @@ public class Rope : MonoBehaviour {
         }
     }
 
-    void Update()
+  /*  void Update()
     {
         for (int i = 0; i < linkArray.Count; i++)
         {
             line.SetPosition(i+1, linkArray[i].transform.position);
         }
+    }*/
+
+    public void BurnLink(GameObject _link)
+    {
+        StartCoroutine(BurnLinkCor(_link));
+    }
+
+    IEnumerator BurnLinkCor(GameObject _link)
+    {
+        _link.transform.Find("OnFire").gameObject.SetActive(true);
+        yield return new WaitForSeconds(burnTime);
+        linkArray.Remove(_link);
+        Destroy(_link);
     }
 }

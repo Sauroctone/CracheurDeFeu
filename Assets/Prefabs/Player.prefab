@@ -401,7 +401,7 @@ MonoBehaviour:
   speed: 5
   speedBreathing: 3
   speedWalking: 5
-  speedJumping: 5
+  speedJumping: 4.5
   jumpForce: 7
   jumpBuffer: 0.1
   wantsToJump: 0
@@ -409,7 +409,7 @@ MonoBehaviour:
   isJumping: 0
   maxVelocity: 8
   normalGravity: 1.5
-  downGravity: 2.5
+  downGravity: 1.89
   isGrounded: 0
 --- !u!198 &198232487873094378
 ParticleSystem:

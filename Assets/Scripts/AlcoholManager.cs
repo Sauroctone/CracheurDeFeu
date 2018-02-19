@@ -67,11 +67,11 @@ public class AlcoholManager : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionStay2D(Collision2D col)
+	void OnTriggerStay2D(Collider2D col)
 	{
-		if (col.gameObject.tag == "Enemy" && !isRecovering)
+		if (col.tag == "Enemy" && !isRecovering)
 		{ 
-			health -= col.gameObject.GetComponent<EnemyBehaviour>().damage;
+			health -= col.gameObject.GetComponentInParent<EnemyBehaviour>().damage;
 			StartCoroutine ("DamageRecovery");
 		}
 	}

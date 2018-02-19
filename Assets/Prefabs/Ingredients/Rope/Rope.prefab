@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4552009501420432
 Transform:
   m_ObjectHideFlags: 1
@@ -181,7 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a76e23771e3bba469b72f7369ef7d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  links: 7
+  links: 14
+  burnTime: 2
   hook: {fileID: 50959816501262440}
   linkPrefab: {fileID: 1790733378981748, guid: 003937dac2d479846b14c92a26fa288e, type: 2}
   weight: {fileID: 0}
