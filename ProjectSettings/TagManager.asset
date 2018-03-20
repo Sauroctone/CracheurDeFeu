@@ -12,6 +12,8 @@ TagManager:
   - Ladder
   - TNT
   - TorchOff
+  - Fuse
+  - Fire
   layers:
   - Default
   - TransparentFX

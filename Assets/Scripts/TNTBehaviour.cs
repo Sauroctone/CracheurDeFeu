@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class TNTBehaviour : MonoBehaviour {
 
-    public ParticleSystem fire;
-    public bool isOnFire;
     public float burnTimer;
     public GameObject explosion;
 
-	public void OnFire()
-    {
-        fire.Play();
-        isOnFire = true;
+	void Start ()
+    { 
         StartCoroutine(FireCor());
     }
 

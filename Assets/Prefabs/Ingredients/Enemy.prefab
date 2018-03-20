@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 61992136850289774}
   - component: {fileID: 61511122969201696}
   - component: {fileID: 114954463779085022}
+  - component: {fileID: 114908891813094664}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -42,14 +43,13 @@ GameObject:
   - component: {fileID: 4292892864828138}
   - component: {fileID: 198058330494346608}
   - component: {fileID: 199035369363100512}
-  - component: {fileID: 114899783436942330}
   m_Layer: 0
   m_Name: OnFire
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1947404096876548
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1321317413133344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7075484, y: -1.9086599, z: 0}
+  m_LocalPosition: {x: -2.87, y: -1.9086599, z: 0}
   m_LocalScale: {x: 0.2981069, y: 0.7993886, z: 1}
   m_Children:
   - {fileID: 4292892864828138}
@@ -207,17 +207,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 0.99999994}
   m_Direction: 0
---- !u!114 &114899783436942330
+--- !u!114 &114908891813094664
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1641598367260344}
+  m_GameObject: {fileID: 1321317413133344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68f03adefdb68c748bcdbe1f6ee057e5, type: 3}
+  m_Script: {fileID: 11500000, guid: d2fc71a5fe88d3e4f9819ac2dcbe1638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireSelf: {fileID: 1641598367260344}
 --- !u!114 &114954463779085022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -230,9 +231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  burningSpeed: 6
   damage: 20
-  isOnFire: 0
-  fire: {fileID: 198058330494346608}
+  fire: {fileID: 1641598367260344}
   health: 100
   healthBurn: 30
 --- !u!198 &198058330494346608
@@ -247,7 +248,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -295,7 +296,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -93883674
+  randomSeed: -25876064
   InitialModule:
     serializedVersion: 3
     enabled: 1

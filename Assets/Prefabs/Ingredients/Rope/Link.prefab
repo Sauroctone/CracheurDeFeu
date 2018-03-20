@@ -21,10 +21,9 @@ GameObject:
   - component: {fileID: 4646432786781142}
   - component: {fileID: 198514968544971072}
   - component: {fileID: 199456153617207718}
-  - component: {fileID: 114640678218754896}
   m_Layer: 0
   m_Name: OnFire
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,6 +40,7 @@ GameObject:
   - component: {fileID: 50320222346562964}
   - component: {fileID: 233231704779665938}
   - component: {fileID: 61606880781918640}
+  - component: {fileID: 114692912841307358}
   m_Layer: 0
   m_Name: Link
   m_TagString: Link
@@ -120,17 +120,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114640678218754896
+--- !u!114 &114692912841307358
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1377366980937332}
+  m_GameObject: {fileID: 1790733378981748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68f03adefdb68c748bcdbe1f6ee057e5, type: 3}
+  m_Script: {fileID: 11500000, guid: d2fc71a5fe88d3e4f9819ac2dcbe1638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireSelf: {fileID: 1377366980937332}
 --- !u!198 &198514968544971072
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour {
 
 	public float speed;
+    public float burningSpeed;
 	private Rigidbody2D rb;
 	public float damage;
-    public bool isOnFire;
-    public ParticleSystem fire;
+    public GameObject fire;
     public float health;
     public float healthBurn;
 
@@ -24,7 +24,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     void Update()
     {
-        if (isOnFire)
+        if (fire.activeSelf)
         {
             health -= healthBurn * Time.deltaTime;
         }
@@ -42,11 +42,4 @@ public class EnemyBehaviour : MonoBehaviour {
 			speed = -speed;
 		}
 	}
-
-    public void OnFire()
-    {
-        isOnFire = true;
-        fire.Play();
-        speed = speed * 2;
-    }
 }
