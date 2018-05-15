@@ -4,23 +4,10 @@ using UnityEngine;
 
 public class FuseBehaviour : MonoBehaviour {
 
-    public Transform[] waypoints;
     public float burnSpeed;
-    public float pathPercent;
-
-    [Header("References")]
-    public LineRenderer line;
+    float pathPercent;
     public GameObject fire;
-
-    void Start()
-    {
-        line.positionCount = waypoints.Length;
-
-        for (int i = 0; i < waypoints.Length; i++)
-        {
-            line.SetPosition(i, waypoints[i].position);
-        }
-    }
+    public FuseInitiation fuse;
 
     void Update()
     {
@@ -29,7 +16,7 @@ public class FuseBehaviour : MonoBehaviour {
             if (pathPercent < 1)
             {
                 pathPercent += burnSpeed * Time.deltaTime;
-                iTween.PutOnPath(fire, waypoints, pathPercent);
+                iTween.PutOnPath(fire, fuse.waypoints, pathPercent);
             }
 
             else
@@ -39,5 +26,3 @@ public class FuseBehaviour : MonoBehaviour {
         }
     }
 }
-
-

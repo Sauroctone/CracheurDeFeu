@@ -11,10 +11,15 @@ public class EnemyBehaviour : MonoBehaviour {
     public GameObject fire;
     public float health;
     public float healthBurn;
+    public LayerMask floorMask;
+    ContactFilter2D filter;
+    public Collider2D[] resultArray;
+    int results;
 
-	void Start()
+    void Start()
 	{
 		rb = GetComponent<Rigidbody2D> ();
+        filter.SetLayerMask(floorMask);
 	}
 
 	void FixedUpdate()
@@ -33,9 +38,23 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             gameObject.SetActive(false);
         }
+
+        resultArray = new Collider2D[5];
+        results = Physics2D.OverlapBox(transform.position + new Vector3(.5f * Mathf.Sign(speed), 0, 0), new Vector2(.3f, .3f), 0f, filter, resultArray);
+
+        if (results == 0)
+        {
+            speed = -speed;
+        }
     }
 
-	void OnTriggerExit2D (Collider2D col)
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1, 0, 0, 0.5F);
+        Gizmos.DrawCube(transform.position + new Vector3(.5f * Mathf.Sign(speed), 0, 0), new Vector3(.3f, .3f, 1f));
+    }
+
+    void OnTriggerExit2D (Collider2D col)
 	{
 		if (col.tag == "Floor")
 		{

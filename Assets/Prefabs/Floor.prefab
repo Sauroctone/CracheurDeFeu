@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4409649635692498}
   - component: {fileID: 212046276507922336}
   - component: {fileID: 61606410484538134}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Sprite
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4555837794578772}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Floor
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ Transform:
   m_GameObject: {fileID: 1020058452319444}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.114, z: 0}
-  m_LocalScale: {x: 6.285597, y: 0.23776878, z: 1}
+  m_LocalScale: {x: 0.94283986, y: 0.23776878, z: 1}
   m_Children: []
   m_Father: {fileID: 4555837794578772}
   m_RootOrder: 0
@@ -63,8 +63,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541947644229340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.64, y: -2.37, z: 0}
+  m_LocalScale: {x: 13.447619, y: 1, z: 1}
   m_Children:
   - {fileID: 4409649635692498}
   m_Father: {fileID: 0}
@@ -108,6 +108,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: a6f29d72d32e2b945b34ca4f90139464, type: 2}
   m_StaticBatchInfo:
