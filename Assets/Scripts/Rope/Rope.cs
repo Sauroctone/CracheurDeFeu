@@ -55,13 +55,6 @@ public class Rope : MonoBehaviour {
 
     public void BurnLink(GameObject _link)
     {
-        StartCoroutine(BurnLinkCor(_link));
-    }
-
-    IEnumerator BurnLinkCor(GameObject _link)
-    {
-        _link.transform.Find("OnFire").gameObject.SetActive(true);
-        yield return new WaitForSeconds(burnTime);
         linkArray.Remove(_link);
         Destroy(_link);
     }

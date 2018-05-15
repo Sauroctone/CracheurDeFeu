@@ -5,6 +5,8 @@ using UnityEngine;
 public class Weight : MonoBehaviour {
 
     public float distanceFromChainEnd = 3;
+    Rigidbody2D otherRB;
+    public GameObject col;
 
 	public void ConnectRopeEnd(Rigidbody2D endRB)
     {
@@ -13,5 +15,16 @@ public class Weight : MonoBehaviour {
         joint.connectedBody = endRB;
         joint.anchor = Vector2.zero;
         joint.connectedAnchor = new Vector2(0f, -distanceFromChainEnd);
+
+        otherRB = endRB;
+    }
+
+    void Update()
+    {
+        if (otherRB.gameObject == null && col != null && !col.activeSelf)
+        {
+            col.SetActive(true);
+            Destroy(this);
+        }
     }
 }
